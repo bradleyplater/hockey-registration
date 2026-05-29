@@ -14,8 +14,9 @@ MVP scope and full context: @docs/eiha-rec-hockey-registration-mvp.md
 
 ### GitHub CLI (`gh`) scopes
 
-The `/complete-issue` and `/create-issue` skills use `gh` to read issues,
-manage GitHub Projects, and open PRs. Ensure your token has these scopes:
+The `/complete-issue`, `/create-issue`, and `/review-mr` skills use `gh` to
+read issues, manage GitHub Projects, open PRs, and post PR comments. Ensure
+your token has these scopes:
 
 ```
 gh auth refresh -s read:project,project
@@ -28,6 +29,17 @@ gh auth refresh -s read:project,project
 | `project` | Add items to a project and update field values (e.g. Status) |
 
 Run `gh auth status` to check your current scopes.
+
+---
+
+## Skills reference
+
+| Skill | Invocation | What it does |
+|---|---|---|
+| `requirements-to-github` | `/requirements-to-github` | Turns a requirements doc into GitHub milestones + issues |
+| `complete-issue` | `/complete-issue <issue#\|URL>` | Drives a GitHub issue through implementation to PR |
+| `create-issue` | `/create-issue` | Drafts and creates a GitHub issue with council review |
+| `review-mr` | `/review-mr [PR#]` | Convenes a council and posts inline review comments on a PR |
 
 ---
 
