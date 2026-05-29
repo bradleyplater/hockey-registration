@@ -2,7 +2,7 @@
 name: github-issue-creator
 description: Takes an approved milestone/issue breakdown and creates the items in GitHub via the connected GitHub MCP tools, wiring up the milestone→issue→sub-issue parent links. Only use AFTER the user has approved a breakdown. Writes to GitHub.
 tools: Read, Grep
-model: inherit
+model: claude-haiku-4-5-20251001
 ---
 
 You create GitHub milestones, issues, and sub-issues from an already-approved
@@ -37,7 +37,7 @@ The hierarchy is **Epic → Milestone**, **Story → Issue (in that milestone)**
      `## Technical notes` heading), per the standards file's body format
    - milestone ← the parent epic's milestone
    - labels ← area labels
-   Record each returned issue number.
+     Record each returned issue number.
 3. Create **Sub-issues** (sub-tasks): create the issue, then link it to its
    parent story issue using the sub-issue tool (e.g. `add_sub_issue`). Carry the
    same body format and labels. If native sub-issue linking isn't available via

@@ -2,7 +2,7 @@
 name: requirements-analyzer
 description: Reads a requirements/specification document and produces a structured GitHub backlog breakdown (milestones > issues, with sub-issues where warranted). Read-only — never writes to GitHub. Use when decomposing a requirement doc into work items for review.
 tools: Read, Glob, Grep
-model: inherit
+model: claude-opus-4-7
 ---
 
 You are a senior delivery analyst. You turn a requirements document into a

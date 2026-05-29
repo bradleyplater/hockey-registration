@@ -24,7 +24,7 @@ You must pause for input at every gate marked **GATE**.
 - **Commit incrementally.** A logical chunk is a commit (e.g. "scaffold prisma
   model", "add server action", "wire up form", "add tests"). Do not batch a
   whole MR into one commit. Commit messages: short imperative subject, body
-  only when the *why* is non-obvious. Always run `git status` and stage by
+  only when the _why_ is non-obvious. Always run `git status` and stage by
   name — never `git add -A`.
 - **Never skip hooks** (`--no-verify`) unless the user explicitly says so.
 - **Run typecheck / lint / tests** after each meaningful chunk, before
@@ -33,6 +33,30 @@ You must pause for input at every gate marked **GATE**.
   the spec, use `AskUserQuestion` — don't infer.
 - **State what you're about to do at each phase boundary** so the user can
   redirect.
+
+---
+
+## Status transitions
+
+Move the issue through these statuses at the phase boundaries below using
+the GitHub Projects API (`gh project item-edit`). Status values:
+
+| Status        | When to set                                            |
+| ------------- | ------------------------------------------------------ |
+| `Ready`       | End of Phase 1, after the summary GATE passes.         |
+| `In Progress` | Start of Phase 5, immediately before the first commit. |
+| `In Review`   | End of Phase 8, immediately after the PR is opened.    |
+
+> **Note:** `Backlog` (default for new issues) and `Done` (set on merge) are
+> not managed by this command.
+
+To update the status, find the issue's project item ID and field ID, then run:
+`gh project item-edit --id <item-id> --field-id <field-id> --project-id <project-id> --single-select-option-id <option-id>`
+
+Use `gh project item-list <project-number> --owner <owner>` to find the item,
+and `gh project field-list <project-number> --owner <owner>` to find the
+Status field and its option IDs. If the issue is not linked to a project or
+the field cannot be updated programmatically, note it to the user and continue.
 
 ---
 
@@ -64,6 +88,7 @@ proceed.
    Phase 4.
 
 **GATE:** confirm the summary matches the user's mental model before moving on.
+**Status transition:** move the issue to `Ready` after this gate passes.
 
 ---
 
@@ -114,9 +139,11 @@ Hold the issue up against `.claude/rules/github-issue-standards.md`. Specificall
   player, etc.) covered if relevant?
 
 ### If the scope is appropriate
+
 State that explicitly and move to Phase 4.
 
 ### If the scope is NOT appropriate — pivot to a ticket creation session
+
 1. Convene `council-issue-creation.md` on the current issue draft.
 2. Propose a concrete decomposition: titles, narratives, ACs, points, labels.
 3. Confirm with the user.
@@ -138,6 +165,7 @@ states, edge cases, copy, where files live, where decisions are recorded —
 overwhelm the user with one-at-a-time prompts.
 
 Cover at minimum:
+
 - Anything the spec is silent on that this work needs to decide.
 - Any conflict between the issue body, comments, spec, and council output.
 - Naming and file location decisions that aren't obvious from the codebase.
@@ -154,6 +182,8 @@ is written.
 
 ## Phase 5 — Implement (with incremental commits)
 
+**Status transition:** move the issue to `In Progress` now, before the first commit.
+
 1. **Branch.** Create and switch:
    `git checkout -b issue-<n>-<short-slug>`
 2. **Plan.** Use `TaskCreate` to lay out the chunks you'll commit
@@ -163,7 +193,7 @@ is written.
    - Make the change.
    - Run typecheck / lint / the relevant test command. Fix what's broken.
    - `git status` → stage by name → commit. Short imperative subject. The
-     body explains *why* if non-obvious; otherwise omit.
+     body explains _why_ if non-obvious; otherwise omit.
 4. **Tests.** Every chunk that adds behavior should add or update a test
    that would fail if the behavior regressed. Do not defer all tests to the
    end.
@@ -187,8 +217,8 @@ For anything in this implementation that future-you would want explained:
   ask the user before creating it.
 - **README / setup changes** — if you added an env var, a script, a
   migration step, update the relevant doc.
-- **Code comments** — only where the *why* is non-obvious. Do not narrate
-  *what* the code does. Per project rules: most code needs no comments.
+- **Code comments** — only where the _why_ is non-obvious. Do not narrate
+  _what_ the code does. Per project rules: most code needs no comments.
 
 Commit docs as their own chunk.
 
@@ -257,6 +287,7 @@ Closes #<n>
 
 3. Return the PR URL to the user.
 
+**Status transition:** move the issue to `In Review` now.
 **GATE:** confirm the PR was opened successfully and the URL is correct. If
 CI is configured, mention that you'll let CI run rather than polling it.
 
