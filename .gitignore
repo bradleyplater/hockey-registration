@@ -74,6 +74,11 @@ web_modules/
 .cache
 .parcel-cache
 
+# Prisma engine binaries (generated per-platform on prisma generate)
+libquery_engine-*
+query-engine-*
+*.so.node
+
 # Next.js build output
 .next
 out
