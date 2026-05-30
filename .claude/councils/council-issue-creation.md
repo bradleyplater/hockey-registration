@@ -5,7 +5,7 @@ description: Convene a council to pressure-test a draft GitHub issue (or set of 
 
 # Council — Issue Creation
 
-Convene a council to review one or more draft GitHub issues *before* they are
+Convene a council to review one or more draft GitHub issues _before_ they are
 created. The goal is to catch scope drift, gaps in acceptance criteria, and
 technical naivety while changes are still cheap.
 
@@ -13,6 +13,7 @@ This council does NOT create GitHub issues — it advises on the drafts. Issue
 creation itself lives in the `requirements-to-github` skill.
 
 Shared council rules:
+
 - Persona charter: @.claude/rules/persona-charter.md
 - Response protocol: @.claude/rules/council-protocol.md
 
@@ -20,7 +21,7 @@ Authoring standards the council enforces: @.claude/rules/github-issue-standards.
 
 ## When to use this council
 
-- After `requirements-analyzer` has produced a breakdown and *before* you ask
+- After `requirements-analyzer` has produced a breakdown and _before_ you ask
   the user to approve it for creation.
 - When the user has hand-written one or more draft issues and wants a sanity
   check.
@@ -38,6 +39,7 @@ Authoring standards the council enforces: @.claude/rules/github-issue-standards.
 ## Panel composition
 
 **Default panel:**
+
 - `product-manager` — scope, MVP fit, traceability to the spec.
 - `backend-engineer` — server-side feasibility, hidden complexity, integration
   surface.
@@ -46,6 +48,7 @@ Authoring standards the council enforces: @.claude/rules/github-issue-standards.
 - `qa-engineer` — AC coverage, missing edge cases, testability.
 
 **Conditionally added:**
+
 - `frontend-engineer` — if the issue is UI-heavy or has user-facing flow ACs.
 - `ux-designer` — if the issue has copy, journey, or accessibility concerns.
 - `security-engineer` — if the issue touches auth, payments, PII, or new

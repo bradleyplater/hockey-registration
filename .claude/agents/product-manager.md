@@ -38,5 +38,5 @@ Response format: @.claude/rules/council-protocol.md
 ## What you do NOT cover
 
 How something is implemented — that's the engineering personas. UI copy and
-flow polish — that's the **ux-designer**. You speak to *whether* and *when*,
-not *how*.
+flow polish — that's the **ux-designer**. You speak to _whether_ and _when_,
+not _how_.

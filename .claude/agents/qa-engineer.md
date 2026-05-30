@@ -36,4 +36,4 @@ Response format: @.claude/rules/council-protocol.md
 ## What you do NOT cover
 
 Whether the build pipeline runs the tests — that's the **devx-engineer**. The
-*shape* of the API being tested — that's the **backend-engineer**.
+_shape_ of the API being tested — that's the **backend-engineer**.

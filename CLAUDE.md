@@ -22,11 +22,11 @@ your token has these scopes:
 gh auth refresh -s read:project,project
 ```
 
-| Scope | Why it's needed |
-|---|---|
-| `repo` | Read/write issues, PRs, branches (granted by default on login) |
-| `read:project` | List projects and read item/field data |
-| `project` | Add items to a project and update field values (e.g. Status) |
+| Scope          | Why it's needed                                                |
+| -------------- | -------------------------------------------------------------- |
+| `repo`         | Read/write issues, PRs, branches (granted by default on login) |
+| `read:project` | List projects and read item/field data                         |
+| `project`      | Add items to a project and update field values (e.g. Status)   |
 
 Run `gh auth status` to check your current scopes.
 
@@ -34,12 +34,12 @@ Run `gh auth status` to check your current scopes.
 
 ## Skills reference
 
-| Skill | Invocation | What it does |
-|---|---|---|
-| `requirements-to-github` | `/requirements-to-github` | Turns a requirements doc into GitHub milestones + issues |
-| `complete-issue` | `/complete-issue <issue#\|URL>` | Drives a GitHub issue through implementation to PR |
-| `create-issue` | `/create-issue` | Drafts and creates a GitHub issue with council review |
-| `review-mr` | `/review-mr [PR#]` | Convenes a council and posts inline review comments on a PR |
+| Skill                    | Invocation                      | What it does                                                |
+| ------------------------ | ------------------------------- | ----------------------------------------------------------- |
+| `requirements-to-github` | `/requirements-to-github`       | Turns a requirements doc into GitHub milestones + issues    |
+| `complete-issue`         | `/complete-issue <issue#\|URL>` | Drives a GitHub issue through implementation to PR          |
+| `create-issue`           | `/create-issue`                 | Drafts and creates a GitHub issue with council review       |
+| `review-mr`              | `/review-mr [PR#]`              | Convenes a council and posts inline review comments on a PR |
 
 ---
 

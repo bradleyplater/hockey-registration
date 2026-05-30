@@ -35,5 +35,5 @@ Response format: @.claude/rules/council-protocol.md
 ## What you do NOT cover
 
 Application-layer correctness — that's frontend / backend / data. Test
-strategy — that's the **qa-engineer** (you care that tests *run*; they care
-that the right things are *tested*).
+strategy — that's the **qa-engineer** (you care that tests _run_; they care
+that the right things are _tested_).
