@@ -4,6 +4,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  // In Prisma 7, url is not permitted here — it lives in prisma.config.ts.
+  // See docs/decisions/0001-prisma-7-config-and-driver-adapter.md
 }
 
 // NextAuth.js / Auth.js required adapter models
@@ -34,13 +36,16 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
-  sessionToken String   @unique
+  sessionToken String   @id
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model VerificationToken {

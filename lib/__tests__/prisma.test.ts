@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 
 // Reset modules before each test so we get a fresh module evaluation.
 // This is necessary because lib/prisma.ts sets a globalThis singleton on load —
@@ -10,9 +10,14 @@ beforeEach(() => {
   delete g.prisma;
 });
 
+afterEach(() => {
+  // Restore all env var stubs so mutations don't bleed between tests.
+  vi.unstubAllEnvs();
+});
+
 describe("Prisma client singleton", () => {
   it("exports a prisma client with the expected interface when DATABASE_URL is set", async () => {
-    process.env.DATABASE_URL = "postgresql://user:password@localhost:5432/hockey_registration";
+    vi.stubEnv("DATABASE_URL", "postgresql://user:password@localhost:5432/hockey_registration");
 
     const { prisma } = await import("../prisma");
 
@@ -22,7 +27,7 @@ describe("Prisma client singleton", () => {
   });
 
   it("throws a clear error when DATABASE_URL is missing", async () => {
-    delete process.env.DATABASE_URL;
+    vi.stubEnv("DATABASE_URL", "");
 
     await expect(import("../prisma")).rejects.toThrow("DATABASE_URL");
   });

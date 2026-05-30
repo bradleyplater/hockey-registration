@@ -1,14 +1,22 @@
+import path from "path";
 import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { seedEmpty } from "./seeds/empty";
 
-// Load .env.local so this script works when run directly via `npm run db:seed`
-dotenv.config({ path: ".env.local" });
+// Resolve .env.local from the project root (process.cwd()).
+// npm scripts always run from the project root, so this is safe and predictable.
+dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
 
-// Safety guard — refuse to run against a production database
-if (process.env.NODE_ENV === "production") {
-  console.error("ERROR: Refusing to seed in production (NODE_ENV=production).");
+// Safety guard — fail closed. Only allow seeding in known-safe environments.
+// Checking for explicit allowlist (not just blocking "production") so an
+// unset or unknown NODE_ENV also fails rather than silently running.
+const allowedEnvs = ["development", "test"];
+if (!allowedEnvs.includes(process.env.NODE_ENV ?? "")) {
+  console.error(
+    `ERROR: Refusing to seed. NODE_ENV is "${process.env.NODE_ENV ?? "unset"}" — ` +
+      `seeding is only permitted when NODE_ENV is one of: ${allowedEnvs.join(", ")}.`
+  );
   process.exit(1);
 }
 

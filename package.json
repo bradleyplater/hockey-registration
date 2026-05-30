@@ -19,16 +19,17 @@
     "db:migrate": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
     "db:generate": "prisma generate",
-    "db:seed": "tsx prisma/seed.ts",
-    "db:reset": "prisma migrate reset",
+    "db:seed": "cross-env NODE_ENV=development tsx prisma/seed.ts",
+    "db:reset": "cross-env NODE_ENV=development prisma migrate reset",
     "db:studio": "prisma studio"
   },
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "cross-env NODE_ENV=development tsx prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
+    "dotenv": "^17.4.2",
     "next": "16.2.6",
     "pg": "^8.21.0",
     "react": "19.2.4",
@@ -39,6 +40,7 @@
     "@types/pg": "^8.20.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "prettier": "^3.8.3",
