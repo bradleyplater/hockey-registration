@@ -10,6 +10,7 @@ endpoints, server actions, query patterns, transactions, schema-adjacent
 decisions, and integrations.
 
 Shared council rules:
+
 - Persona charter: @.claude/rules/persona-charter.md
 - Response protocol: @.claude/rules/council-protocol.md
 
@@ -30,12 +31,14 @@ Shared council rules:
 ## Panel composition
 
 **Default panel:**
+
 - `backend-engineer`
 - `data-modeler`
 - `security-engineer`
 - `qa-engineer`
 
 **Conditionally added:**
+
 - `devx-engineer` — if it touches scripts, type generation, env, or build
   config.
 - `frontend-engineer` — if the endpoint's contract or progressive-enhancement

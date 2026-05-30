@@ -28,17 +28,20 @@ work down further. See the rules file for the exact thresholds.
 ## Workflow
 
 ### 1. Analyze
+
 Delegate to the `requirements-analyzer` agent with the document path. It returns
 a structured milestone/issue breakdown (read-only — nothing is created yet).
 Pass along any scope notes the user gave.
 
 ### 2. Review with the user — REQUIRED GATE
+
 Present the breakdown summary (milestone/issue counts, total points, scope
 exclusions) and the full breakdown. Ask the user to approve, edit, or reject.
 Do NOT proceed to creation until the user explicitly approves. Incorporate any
 requested changes and re-present.
 
 ### 3. Create in GitHub
+
 Once approved, confirm a GitHub MCP is connected. If none is connected, guide
 the user to add the **GitHub MCP** (`/mcp` or settings), then continue.
 Delegate to the `github-issue-creator` agent with the approved breakdown and the
@@ -46,6 +49,7 @@ target `owner/repo`. It creates milestones → issues (assigned to milestone) �
 sub-issues with correct parent links.
 
 ### 4. Report
+
 Relay the creation report: a table of every item (type, number/URL, title,
 parent milestone/issue) and any fields that couldn't be set (e.g. a label that
 didn't exist and had to be created or skipped).

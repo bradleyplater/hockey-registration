@@ -10,6 +10,7 @@ synthesized report. Personas are read-only advisors; the main session
 synthesizes and (if asked) acts.
 
 Shared council rules:
+
 - Persona charter: @.claude/rules/persona-charter.md
 - Response protocol: @.claude/rules/council-protocol.md
 
@@ -28,12 +29,14 @@ If the diff is empty, stop and say so. Do not convene a council over nothing.
 ## Panel composition
 
 **Default panel** (always convened):
+
 - `backend-engineer`
 - `frontend-engineer`
 - `security-engineer`
 - `qa-engineer`
 
 **Conditionally added** based on what the diff touches:
+
 - `data-modeler` — if `prisma/schema.prisma` or any migration changed.
 - `ux-designer` — if UI files changed (`app/**`, `components/**`, copy).
 - `devx-engineer` — if `package.json`, scripts, CI, tooling, or env config

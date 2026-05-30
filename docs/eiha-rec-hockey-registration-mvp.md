@@ -9,12 +9,14 @@ This project proposes a modern, web-based replacement focused initially on the m
 ## 2. Goals & Non-Goals
 
 ### Goals
+
 - Deliver a clean, intuitive web application that handles the full player and team registration lifecycle.
 - Provide each user group (association admins, team managers, players) with a dedicated portal that surfaces the information and actions relevant to them.
 - Replace the legacy approval workflow with a parallel dual-approval model that is faster and clearer than the current sequential, opaque process.
 - Build a foundation that is extensible to support future features (game creation, expanded admin roles, identity verification, etc.) without major rework.
 
 ### Non-Goals (Out of Scope for MVP)
+
 - Live player onboarding — the MVP exists to demonstrate the system to stakeholders, not to handle real registrations.
 - Real photo or ID document storage — these steps will exist in the user journey but the upload functionality will be stubbed.
 - Integration with a third-party identity verification provider.
@@ -29,35 +31,43 @@ This project proposes a modern, web-based replacement focused initially on the m
 The system serves three primary user groups, listed in order of priority for the MVP design:
 
 ### 3.1 Association Administrators
+
 The most senior users. They approve and administer all player and team registrations across the association. For the MVP there will be a single association admin role, though the underlying permission model should be built to support multiple admin types in future.
 
 ### 3.2 Team Managers
+
 Each team has exactly one manager — the person who created the team. The manager is responsible for managing their team's profile and approving incoming player registrations. They can also promote existing players on their team to **team admin**, granting them specific permissions. For the MVP, the only assignable permission is "player registration approval", but the model should accommodate additional permissions (e.g. game creation, game submission) in future.
 
 ### 3.3 Players
+
 Players register themselves for a team each season. They have a personal portal where they can see the status of pending and approved registrations.
 
 ## 4. Core Concepts
 
 ### 4.1 Seasons
+
 - A season runs from **1 October to 30 September** of the following year.
 - Seasons are labelled in `YY/YY` format — for example, the current season starting October 2025 is the **25/26** season.
 - New seasons are created automatically on 1 October each year.
 
 ### 4.2 Playing Categories
+
 Every player self-declares one playing category at registration. Selection is based on trust, and there is no challenge or correction process in the MVP.
 
 **UK-Born Players**
+
 - **Cat A** — Any UK-born player who has had no ice hockey experience, or has only ever played at a recreational level.
 - **Cat B** — Any UK-born player who has had any junior league training or experience.
 - **Cat C** — Any UK-born player who has had any adult league training or experience.
 
 **Non-UK Born / Trained Players**
+
 - **Cat A** — Any non-UK-born player who has had no ice hockey experience, or has only ever played at a recreational level.
 - **Cat Z** — Any player receiving league training/experience as a junior, as a citizen of a country other than the UK.
 - **Cat ZZ** — Any player receiving league training/experience as an adult, as a citizen of a country other than the UK.
 
 ### 4.3 Registration Fee
+
 A flat fee applies to all players regardless of category, paid via Stripe at the point of submission.
 
 ## 5. User Journeys
@@ -101,6 +111,7 @@ A returning player is any player who has been registered in either of the previo
 ### 5.4 Team Management
 
 Once a team is active, the team manager can:
+
 - View the team's roster (pending, approved, and rejected players).
 - Approve or reject incoming player registrations (with comments where relevant).
 - Promote any registered player on the team to **team admin** and assign them specific permissions. For the MVP the only assignable permission is **player registration approval**.
@@ -108,6 +119,7 @@ Once a team is active, the team manager can:
 ## 6. Data Captured During Player Registration
 
 ### Player Details
+
 - Name
 - Date of birth
 - Gender
@@ -118,43 +130,52 @@ Once a team is active, the team manager can:
 - Email
 
 ### Playing History
+
 - Self-declared playing category (see Section 4.2).
 
 ### Player Registration
+
 - Team being registered for.
-- *(Future)* Previous team — out of scope for MVP.
+- _(Future)_ Previous team — out of scope for MVP.
 
 ### Declarations
+
 Both declarations are recorded as true/false acceptance flags. Placeholder declaration text will be used for the MVP and finalised later.
+
 - Registration declaration
 - Data protection declaration
 
 ### Detail Confirmation
+
 - A summary screen where the player confirms all the above information is correct before submission.
 
 ### Photo & Identity
+
 - Passport-style photo upload — **stubbed in MVP** (upload step present in the journey, but file is not persisted).
 - ID document upload — **stubbed in MVP** for the same reason.
 
 ### Payment
+
 - Stripe payment is taken at the point of submission, using Stripe test cards during the POC phase.
 
 ## 7. Technical Approach
 
 ### 7.1 Stack Summary
 
-| Layer | Choice | Rationale |
-|---|---|---|
-| Language | TypeScript | Aligns with developer skill set; strong typing across the stack. |
-| Framework | Next.js (App Router) | Single full-stack codebase, mature ecosystem, excellent TypeScript support, large community for support. |
-| Database | PostgreSQL | Relational data model maps naturally onto players, teams, registrations, and seasons. |
-| ORM | Prisma | TypeScript-first ORM, auto-generated types, schema-driven migrations. |
-| Authentication | Magic link (passwordless) via NextAuth.js / Auth.js | Removes password management overhead; lightweight UX for a hobby-user base. |
-| Payments | Stripe | Industry standard; test cards make POC development straightforward. |
-| File Storage | Stubbed | Real photo/ID handling deferred to a future third-party identity verification integration. |
+| Layer          | Choice                                              | Rationale                                                                                                |
+| -------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Language       | TypeScript                                          | Aligns with developer skill set; strong typing across the stack.                                         |
+| Framework      | Next.js (App Router)                                | Single full-stack codebase, mature ecosystem, excellent TypeScript support, large community for support. |
+| Database       | PostgreSQL                                          | Relational data model maps naturally onto players, teams, registrations, and seasons.                    |
+| ORM            | Prisma                                              | TypeScript-first ORM, auto-generated types, schema-driven migrations.                                    |
+| Authentication | Magic link (passwordless) via NextAuth.js / Auth.js | Removes password management overhead; lightweight UX for a hobby-user base.                              |
+| Payments       | Stripe                                              | Industry standard; test cards make POC development straightforward.                                      |
+| File Storage   | Stubbed                                             | Real photo/ID handling deferred to a future third-party identity verification integration.               |
 
 ### 7.2 Rationale for Next.js
+
 Next.js was chosen over Remix and a React + Vite + standalone backend setup primarily because:
+
 - It offers a single project that handles both frontend and backend, simplifying development for a side project with one developer.
 - The ecosystem around payments (Stripe), authentication (NextAuth.js), and Postgres tooling is the most mature of the options considered.
 - The community is large, meaning more readily available examples and troubleshooting support — valuable for a POC being built in spare time.
@@ -162,25 +183,29 @@ Next.js was chosen over Remix and a React + Vite + standalone backend setup prim
 Remix was a close second due to its form-handling strengths (which suit a form-heavy app like this) but was set aside because of its smaller ecosystem and reduced community support.
 
 ### 7.3 Identity & Document Handling
+
 For the MVP, photo and ID uploads are deliberately stubbed because of GDPR and broader data protection concerns. Production implementation will integrate a specialist third-party identity verification provider (candidates include Onfido, Stripe Identity, Veriff, or Persona) that handles encryption, retention, and regulatory compliance on our behalf.
 
 ### 7.4 Extensibility Considerations
+
 Although the MVP scope is intentionally tight, the following should be built with future extension in mind:
+
 - The **association admin role** should be modelled as one role type within a wider role system, so additional admin tiers can be added without rework.
 - The **team admin permission model** should be a flexible permission set, with "player registration approval" as the first defined permission. Future permissions (game creation, game submission, etc.) should slot in without schema changes.
 - The **season model** should be generic enough that retention rules (e.g. "registered within the previous 2 seasons") can be queried against any past season.
 
 ## 8. Approval Workflow Detail
 
-| State | Description |
-|---|---|
-| Pending | Registration submitted; awaiting approval from both team and association. |
-| Team Approved | Team has approved; still awaiting association approval. |
-| Association Approved | Association has approved; still awaiting team approval. |
-| Approved | Both parties have approved. Player is officially registered. |
-| Rejected | One or both parties have rejected with comments. Player can amend and resubmit. |
+| State                | Description                                                                     |
+| -------------------- | ------------------------------------------------------------------------------- |
+| Pending              | Registration submitted; awaiting approval from both team and association.       |
+| Team Approved        | Team has approved; still awaiting association approval.                         |
+| Association Approved | Association has approved; still awaiting team approval.                         |
+| Approved             | Both parties have approved. Player is officially registered.                    |
+| Rejected             | One or both parties have rejected with comments. Player can amend and resubmit. |
 
 Notes:
+
 - Team and association reviews can happen in **parallel** — order does not matter.
 - A rejection from either party puts the registration into the **Rejected** state and surfaces the rejection comment(s) in the player's portal.
 - On resubmission after rejection, **both** parties must approve again from scratch — prior approvals are not retained.
@@ -194,12 +219,12 @@ Notes:
 
 ## 10. Risks & Mitigations
 
-| Risk | Mitigation |
-|---|---|
-| GDPR / data protection compliance, particularly around photos and ID documents. | Stub the upload functionality entirely in MVP; defer real handling to a specialist third-party provider. |
-| Trust-based category self-selection could be misused. | Acknowledged as an MVP limitation. A future iteration may add an admin challenge/correction process. |
-| Side project with no deadline — risk of scope creep. | Strict MVP scope is documented above; new ideas should be parked as future enhancements rather than absorbed mid-build. |
-| Sole-developer continuity risk. | Use of well-documented, popular tooling (Next.js, Prisma, Stripe) means future contributors can ramp up quickly if needed. |
+| Risk                                                                            | Mitigation                                                                                                                 |
+| ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| GDPR / data protection compliance, particularly around photos and ID documents. | Stub the upload functionality entirely in MVP; defer real handling to a specialist third-party provider.                   |
+| Trust-based category self-selection could be misused.                           | Acknowledged as an MVP limitation. A future iteration may add an admin challenge/correction process.                       |
+| Side project with no deadline — risk of scope creep.                            | Strict MVP scope is documented above; new ideas should be parked as future enhancements rather than absorbed mid-build.    |
+| Sole-developer continuity risk.                                                 | Use of well-documented, popular tooling (Next.js, Prisma, Stripe) means future contributors can ramp up quickly if needed. |
 
 ## 11. Success Criteria
 
@@ -212,6 +237,7 @@ None outstanding at the time of writing. Items deferred to future phases are cap
 ## 13. Future Enhancements (Beyond MVP)
 
 Captured here for context, but explicitly out of scope for the MVP build:
+
 - Previous team tracking on player registrations.
 - Real photo and ID document handling via a third-party identity verification provider.
 - Additional team admin permissions (game creation, game submission, etc.).

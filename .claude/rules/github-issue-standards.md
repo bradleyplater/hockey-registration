@@ -32,7 +32,7 @@ few big ones.
 
 - **Milestone (epic)** — see mapping above. Spans multiple story issues.
 - **Story issue** — must satisfy INVEST (Independent, Negotiable, Valuable,
-  Estimable, Small, Testable). Keep the *Small* deliberately tight: if a story
+  Estimable, Small, Testable). Keep the _Small_ deliberately tight: if a story
   would land as more than one reviewable MR, it is too big — either split it into
   multiple story issues or break it into sub-issues (below). If a story can't be
   estimated or tested as written, split it.
@@ -44,6 +44,7 @@ few big ones.
   single small MR (≈1–2 points).
 
 Rules of thumb:
+
 - **Split aggressively.** A story above ~3 points should almost always be broken
   into sub-issues (or split into smaller stories); a story above ~5 points must
   be. Never leave a 5+ point story as a single undecomposed unit.

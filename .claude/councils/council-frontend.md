@@ -10,6 +10,7 @@ components, forms, client/server boundaries, accessibility, or design
 direction.
 
 Shared council rules:
+
 - Persona charter: @.claude/rules/persona-charter.md
 - Response protocol: @.claude/rules/council-protocol.md
 
@@ -30,11 +31,13 @@ Shared council rules:
 ## Panel composition
 
 **Default panel:**
+
 - `frontend-engineer`
 - `ux-designer`
 - `qa-engineer`
 
 **Conditionally added:**
+
 - `security-engineer` — anything touching auth UI, sign-in, session-bound
   views, or forms that submit PII.
 - `devx-engineer` — anything touching the component conventions, design

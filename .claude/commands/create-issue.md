@@ -44,7 +44,7 @@ This command **overrides auto-mode's bias against asking clarifying questions**
 Using the issue standards, write a full draft that includes:
 
 - **Title** — action-oriented, role-framed where natural (`As a <role>, I can
-  <action> so that <benefit>`, or plain imperative for technical work).
+<action> so that <benefit>`, or plain imperative for technical work).
 - **Body** — context + the user-story narrative.
 - **Story points** — modified Fibonacci (1, 2, 3, 5, 8, 13). If the draft
   would be 5+ points or clearly spans more than one small MR, flag it now as

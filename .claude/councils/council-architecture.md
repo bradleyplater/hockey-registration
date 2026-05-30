@@ -15,12 +15,14 @@ This council is NOT for "add a CRUD endpoint" or "tweak this component" — use
 when the decision will outlive the issue.
 
 Shared council rules:
+
 - Persona charter: @.claude/rules/persona-charter.md
 - Response protocol: @.claude/rules/council-protocol.md
 
 ## When to use this council
 
 **Strong signals:**
+
 - Touches data model + server + UI together with a non-trivial design choice.
 - Implicates one of the extensibility hooks the spec calls out (role model,
   team-admin permission model, season retention queries — see Section 7.4
@@ -30,6 +32,7 @@ Shared council rules:
 - The decision sets a precedent the project will live with.
 
 **Weak signals (use a layer council instead):**
+
 - Single-layer work, even if it's significant.
 - "Where should this file live" or naming questions.
 
@@ -51,12 +54,14 @@ The framing is the value, not the headcount. Convene the layer voices
 together and brief them to think in cross-layer terms.
 
 **Default panel:**
+
 - `backend-engineer`
 - `frontend-engineer`
 - `data-modeler`
 - `product-manager`
 
 **Conditionally added:**
+
 - `security-engineer` — if the decision moves a trust boundary or changes
   who-can-do-what.
 - `devx-engineer` — if the decision shapes build, type generation, or how
